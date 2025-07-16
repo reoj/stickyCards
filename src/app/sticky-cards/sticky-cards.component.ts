@@ -10,13 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-
-interface CardData {
-  id: number;
-  title: string;
-  content: string;
-  color: string;
-}
+import { CardData } from './CardData';
 
 @Component({
   selector: 'app-sticky-cards',
@@ -38,39 +32,21 @@ export class StickyCardsComponent {
   cards = signal<CardData[]>([
     {
       id: 1,
-      title: 'Task 1',
+      title: 'Weather',
       content: 'Complete project documentation',
       color: '#ffeb3b',
     },
     {
       id: 2,
-      title: 'Task 2',
+      title: 'Notes',
       content: 'Review code changes',
       color: '#4caf50',
     },
     {
       id: 3,
-      title: 'Task 3',
+      title: 'News',
       content: 'Update dependencies',
       color: '#2196f3',
-    },
-    {
-      id: 4,
-      title: 'Task 4',
-      content: 'Fix reported bugs',
-      color: '#ff9800',
-    },
-    {
-      id: 5,
-      title: 'Task 5',
-      content: 'Prepare for release',
-      color: '#9c27b0',
-    },
-    {
-      id: 6,
-      title: 'Task 6',
-      content: 'Team meeting notes',
-      color: '#f44336',
     },
   ]);
 
