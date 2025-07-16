@@ -66,6 +66,10 @@
   background: rgba(255, 255, 255, 0.8);
   opacity: 0;
   transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .sticky-card:hover .delete-button {
@@ -75,6 +79,10 @@
 .delete-button mat-icon {
   font-size: 18px;
   color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .drag-handle {
@@ -91,7 +99,7 @@
 
 .drag-handle mat-icon {
   font-size: 20px;
-  color: #666;
+  color: #cccccc;
 }
 
 /* CDK Drag and Drop styles */
@@ -122,13 +130,13 @@
   .cards-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .header {
     flex-direction: column;
     gap: 15px;
     align-items: stretch;
   }
-  
+
   .add-button {
     justify-content: center;
   }
