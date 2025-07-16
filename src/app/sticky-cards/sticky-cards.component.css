@@ -55,6 +55,8 @@
   font-size: 1.2em;
   font-weight: 600;
   color: #333;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
 }
 
 .delete-button {
