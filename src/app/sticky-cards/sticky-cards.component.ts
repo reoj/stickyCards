@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   CdkDrag,
@@ -9,8 +9,17 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
-import { CardData } from './CardData';
+import { forkJoin } from 'rxjs';
+
+import { Card, WeatherCard, NotesCard, NewsCard } from './models';
+import { WeatherService } from './services/weather.service';
+import { NewsService } from './services/news.service';
+import { NotesService } from './services/notes.service';
+import { WeatherCardComponent } from './components/weather-card.component';
+import { NotesCardComponent } from './components/notes-card.component';
+import { NewsCardComponent } from './components/news-card.component';
 
 @Component({
   selector: 'app-sticky-cards',
@@ -20,57 +29,90 @@ import { CardData } from './CardData';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatMenuModule,
     CdkDropList,
     CdkDrag,
     CdkDragHandle,
+    WeatherCardComponent,
+    NotesCardComponent,
+    NewsCardComponent
   ],
   templateUrl: './sticky-cards.component.html',
   styleUrl: './sticky-cards.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StickyCardsComponent {
-  cards = signal<CardData[]>([
-    {
-      id: 1,
-      title: 'Weather',
-      content: 'Complete project documentation',
-      color: '#ffeb3b',
-    },
-    {
-      id: 2,
-      title: 'Notes',
-      content: 'Review code changes',
-      color: '#4caf50',
-    },
-    {
-      id: 3,
-      title: 'News',
-      content: 'Update dependencies',
-      color: '#2196f3',
-    },
-  ]);
+export class StickyCardsComponent implements OnInit {
+  cards = signal<Card[]>([]);
 
-  drop(event: CdkDragDrop<CardData[]>) {
+  constructor(
+    private weatherService: WeatherService,
+    private newsService: NewsService,
+    private notesService: NotesService
+  ) {}
+
+  ngOnInit() {
+    this.loadCards();
+  }
+
+  loadCards() {
+    forkJoin({
+      weather: this.weatherService.getWeatherData(),
+      news: this.newsService.getNewsData(),
+      notes: this.notesService.getNotesData()
+    }).subscribe(({ weather, news, notes }) => {
+      const allCards: Card[] = [...weather, ...news, ...notes];
+      this.cards.set(allCards);
+    });
+  }
+
+  drop(event: CdkDragDrop<Card[]>) {
     const cards = this.cards();
     moveItemInArray(cards, event.previousIndex, event.currentIndex);
     this.cards.set([...cards]);
   }
 
-  addCard() {
-    const newCard: CardData = {
-      id: Date.now(),
-      title: `Task ${this.cards().length + 1}`,
-      content: 'New task content',
+  addWeatherCard() {
+    // In a real app, you'd add a new location
+    console.log('Add weather card functionality');
+  }
+
+  addNewsCard() {
+    // In a real app, you'd add a new news source
+    console.log('Add news card functionality');
+  }
+
+  addNotesCard() {
+    this.notesService.createNote({
+      title: `Note ${this.cards().filter(c => c.type === 'notes').length + 1}`,
+      content: 'New note content...',
       color: this.getRandomColor(),
-    };
-    this.cards.update((cards) => [...cards, newCard]);
+      tags: [],
+      priority: 'medium'
+    }).subscribe(newNote => {
+      this.cards.update(cards => [...cards, newNote]);
+    });
+  }
+
+  updateNotesCard(card: NotesCard) {
+    this.notesService.updateNote(card).subscribe(updatedCard => {
+      this.cards.update(cards => 
+        cards.map(c => c.id === updatedCard.id ? updatedCard : c)
+      );
+    });
   }
 
   removeCard(cardId: number) {
-    this.cards.update((cards) => cards.filter((card) => card.id !== cardId));
+    const card = this.cards().find(c => c.id === cardId);
+    if (card?.type === 'notes') {
+      this.notesService.deleteNote(cardId).subscribe(() => {
+        this.cards.update(cards => cards.filter(c => c.id !== cardId));
+      });
+    } else {
+      this.cards.update(cards => cards.filter(c => c.id !== cardId));
+    }
   }
 
-  trackByCardId(index: number, card: CardData): number {
+  trackByCardId(index: number, card: Card): number {
     return card.id;
   }
 
