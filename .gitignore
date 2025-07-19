@@ -1,0 +1,9 @@
+.angular/cache/*
+.angular/cache/**/*
+node_modules/.bin/*
+node_modules/.bin/gh-pages-clean.cmd
+node_modules/*
+node_modules/**/*
+dist/*
+dist/**/*
+
