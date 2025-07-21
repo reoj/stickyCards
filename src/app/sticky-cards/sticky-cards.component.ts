@@ -118,7 +118,7 @@ export class StickyCardsComponent implements OnInit {
 
   private getRandomColor(): string {
     const colors = [
-      '#ffeb3b',
+      '#ccb75c',
       '#4caf50',
       '#2196f3',
       '#ff9800',

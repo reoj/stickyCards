@@ -29,18 +29,20 @@
       [class.cdk-drag-animating]="true"
     >
       <div class="drag-handle" cdkDragHandle>
-        <mat-icon fontIcon="drag_indicator" aria-hidden="false" aria-label="Drag handle"></mat-icon>
+        <mat-icon fontIcon="drag_handle" aria-hidden="false" aria-label="Drag handle"></mat-icon>
       </div>
       
       <!-- Weather Card -->
       <app-weather-card 
         *ngIf="card.type === 'weather'" 
+        class="basecard"
         [card]="card">
       </app-weather-card>
       
       <!-- Notes Card -->
       <app-notes-card 
         *ngIf="card.type === 'notes'" 
+        class="basecard"
         [card]="card"
         (updateCard)="updateNotesCard($event)"
         (deleteCard)="removeCard($event)">
@@ -49,6 +51,7 @@
       <!-- News Card -->
       <app-news-card 
         *ngIf="card.type === 'news'" 
+        class="basecard"
         [card]="card">
       </app-news-card>
     </div>

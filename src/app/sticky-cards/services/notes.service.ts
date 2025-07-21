@@ -11,7 +11,7 @@ export class NotesService {
     {
       id: 3001,
       title: 'Daily Tasks',
-      color: '#ffeb3b',
+      color: '#ccb75c',
       type: 'notes',
       position: { x: 0, y: 0 },
       createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
@@ -31,7 +31,7 @@ export class NotesService {
     const newNote: NotesCard = {
       id: Date.now(),
       title: note.title || 'New Note',
-      color: note.color || '#ffeb3b',
+      color: note.color || '#ccb75c',
       type: 'notes',
       position: note.position || { x: 0, y: 0 },
       createdAt: new Date(),

@@ -1,7 +1,7 @@
 .notes-card {
-  width: 250px;
+  width: 100%;
   min-height: 200px;
-  margin: 8px;
+  margin: auto;
   cursor: move;
 }
 

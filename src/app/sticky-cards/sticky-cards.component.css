@@ -43,24 +43,21 @@
 
 .card-wrapper {
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
 }
 
-.card-wrapper:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
 
 .drag-handle {
   position: absolute;
   top: 8px;
   right: 8px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   padding: 4px;
   cursor: grab;
   transition: background 0.3s ease;
+  background: rgba(0, 0, 0, 0.05);
+  padding-top: 6px;
 }
 
 .drag-handle:hover {
@@ -124,6 +121,14 @@ app-notes-card,
 app-news-card {
   display: block;
   width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+app-weather-card:hover,
+app-notes-card:hover,
+app-news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Animation for card additions */

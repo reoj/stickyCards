@@ -1,7 +1,7 @@
 .news-card {
-  width: 280px;
+  width: 100%;
   min-height: 300px;
-  margin: 8px;
+  margin: auto;
   cursor: move;
 }
 
