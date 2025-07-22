@@ -33,22 +33,3 @@ mat-card-header {
 .tags {
   margin-bottom: 8px;
 }
-
-.priority {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.9em;
-}
-
-.priority-low {
-  color: #4caf50;
-}
-
-.priority-medium {
-  color: #ff9800;
-}
-
-.priority-high {
-  color: #f44336;
-}

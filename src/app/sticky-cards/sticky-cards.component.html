@@ -1,59 +1,57 @@
 <div class="sticky-cards-container">
   <div class="header">
     <h1>Make IT a great day!</h1>
-    <button class="add-button" [matMenuTriggerFor]="addMenu" mat-raised-button color="primary">
-      <mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"></mat-icon>
-      Add Card  
-    </button>
-    <mat-menu #addMenu="matMenu">
-      <button mat-menu-item (click)="addWeatherCard()">
-        <mat-icon>wb_sunny</mat-icon>
-        Weather Card
-      </button>
-      <button mat-menu-item (click)="addNotesCard()">
-        <mat-icon>note</mat-icon>
-        Notes Card
-      </button>
-      <button mat-menu-item (click)="addNewsCard()">
-        <mat-icon>article</mat-icon>
-        News Card
-      </button>
-    </mat-menu>
+    
   </div>
-
-  <div class="cards-grid" cdkDropList (cdkDropListDropped)="drop($event)">
-    <div
-      *ngFor="let card of cards(); trackBy: trackByCardId"
-      cdkDrag
-      class="card-wrapper"
-      [class.cdk-drag-animating]="true"
-    >
-      <div class="drag-handle" cdkDragHandle>
-        <mat-icon fontIcon="drag_handle" aria-hidden="false" aria-label="Drag handle"></mat-icon>
+  <div>
+    <div class="row-flex">
+      <div class="wide-card card">
+        <div class="card-header">
+          <h2>Weather</h2>
+        </div>
+        <div class="card-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
       </div>
-      
-      <!-- Weather Card -->
-      <app-weather-card 
-        *ngIf="card.type === 'weather'" 
-        class="basecard"
-        [card]="card">
-      </app-weather-card>
-      
-      <!-- Notes Card -->
-      <app-notes-card 
-        *ngIf="card.type === 'notes'" 
-        class="basecard"
-        [card]="card"
-        (updateCard)="updateNotesCard($event)"
-        (deleteCard)="removeCard($event)">
-      </app-notes-card>
-      
-      <!-- News Card -->
-      <app-news-card 
-        *ngIf="card.type === 'news'" 
-        class="basecard"
-        [card]="card">
-      </app-news-card>
+      <div class="small-card card">
+        <div class="card-header">
+          <h2>Notes</h2>
+        </div>
+        <div class="card-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row-flex">
+      <div class="small-card card">
+        <div class="card-header">
+          <h2>08:22</h2>
+        </div>
+        <div class="card-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </div>
+      <div class="wide-card card">
+        <div class="card-header">
+          <h2>News</h2>
+        </div>
+        <div class="card-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
+  
 </div>

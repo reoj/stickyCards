@@ -55,31 +55,10 @@ export class StickyCardsComponent implements OnInit {
   }
 
   loadCards() {
-    forkJoin({
-      weather: this.weatherService.getWeatherData(),
-      news: this.newsService.getNewsData(),
-      notes: this.notesService.getNotesData()
-    }).subscribe(({ weather, news, notes }) => {
-      const allCards: Card[] = [...weather, ...news, ...notes];
-      this.cards.set(allCards);
-    });
+    
   }
 
-  drop(event: CdkDragDrop<Card[]>) {
-    const cards = this.cards();
-    moveItemInArray(cards, event.previousIndex, event.currentIndex);
-    this.cards.set([...cards]);
-  }
-
-  addWeatherCard() {
-    // In a real app, you'd add a new location
-    console.log('Add weather card functionality');
-  }
-
-  addNewsCard() {
-    // In a real app, you'd add a new news source
-    console.log('Add news card functionality');
-  }
+  
 
   addNotesCard() {
     this.notesService.createNote({
